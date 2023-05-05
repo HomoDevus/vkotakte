@@ -1,4 +1,4 @@
-import { Types } from "mongoose";
+import { Types } from 'mongoose';
 
 type User = {
   email?: string;
@@ -7,7 +7,7 @@ type User = {
   city?: string;
   avatar?: string;
   _id: Types.ObjectId;
-}
+};
 
 export function mapUserResponse(userData: User) {
   return {
@@ -16,8 +16,8 @@ export function mapUserResponse(userData: User) {
     age: userData.age,
     city: userData.city,
     avatar: userData.avatar,
-    id: userData._id
-  }
+    id: userData._id,
+  };
 }
 
 export function mapUserUpdate(userData: User) {
@@ -25,6 +25,6 @@ export function mapUserUpdate(userData: User) {
     name: userData.name,
     age: userData.age,
     city: userData.city,
-    avatar: userData.avatar
-  }
+    avatar: userData.avatar,
+  };
 }
