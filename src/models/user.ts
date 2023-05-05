@@ -7,6 +7,11 @@ const userSchema = new Schema({
     password: String,
     name: String,
     user_type_id: Number,
+    age: Number,
+    city: String,
+    publications: [String],
+    friends: [String],
+    avatar: Buffer
 });
 
 export default mongoose.model('user', userSchema, 'users');
