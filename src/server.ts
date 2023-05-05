@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 import express from 'express';
 import { config } from 'dotenv';
 
@@ -22,9 +22,9 @@ app.listen(port, function () {
     if (!db) throw Error('Mongodb host is not specified');
 
     mongoose
-      .connect(db)
-      .then(() => console.log('Connected to mongodb'))
-      .catch((err) => console.error('Mongodb connection error', err));
+        .connect(db)
+        .then(() => console.log('Connected to mongodb'))
+        .catch((err) => console.error('Mongodb connection error', err));
 
     console.log('Server running on localhost:' + port);
 });
