@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import bcrypt from 'bcryptjs';
 import User from '../models/user';
 import jwt from 'jsonwebtoken';
+import path from "path";
+import { ImageModel } from "../models/image";
 
 const config = process.env;
 
@@ -46,8 +48,8 @@ export const register = async (req: Request, res: Response) => {
 
     res.status(200).send({ token });
   } catch (err) {
-    console.log(err);
-    res.status(500);
+    console.error(err);
+    res.sendStatus(500);
   }
 };
 
@@ -71,7 +73,24 @@ export const login = async (req: Request, res: Response) => {
       res.status(401).send('Invalid mobile');
     }
   } catch (err) {
-    console.log(err);
-    res.status(500);
+    console.error(err);
+    res.sendStatus(500);
   }
 };
+
+export const uploadAvatar = async (req: Request, res: Response) => {
+  try {
+    // @ts-ignore
+    const { avatar } = req.files;
+
+    if (!avatar) return res.sendStatus(400);
+    if (!/^image/.test(avatar.mimetype)) return res.sendStatus(400);
+
+    avatar.mv(path.resolve(`./upload/${avatar.name}`));
+    const savedImage = await ImageModel.create(avatar);
+    res.send(savedImage);
+  } catch (err) {
+    console.error(err);
+    return res.sendStatus(500)
+  }
+}

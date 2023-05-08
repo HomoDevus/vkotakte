@@ -1,12 +1,25 @@
 import mongoose from 'mongoose';
 import express from 'express';
 import { config } from 'dotenv';
+import cors from 'cors';
+import fileUpload from 'express-fileupload';
 
 const app = express();
 
 config();
 
-app.use(express.json()); //or use body-parser middleware to parse the JSON body from HTTP request
+const { FRONTEND_URL } = process.env;
+
+app.use(cors({ origin: FRONTEND_URL ? [FRONTEND_URL] : [] }));
+app.use(express.json());
+app.use(
+  fileUpload({
+    limits: {
+      fileSize: 12000000,
+    },
+    abortOnLimit: true,
+  })
+);
 
 // Import Routes
 import authRoute from './routes';

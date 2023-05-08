@@ -24,7 +24,7 @@ export const getUserInfo = async (req: Request, res: Response) => {
     }
   } catch (err) {
     console.error(err);
-    res.status(500);
+    res.sendStatus(500);
   }
 };
 
@@ -49,6 +49,6 @@ export const updateUserInfo = async (req: Request, res: Response) => {
 
     res.json(mapUserResponse(updatedUser));
   } catch (err) {
-    res.status(500);
+    res.sendStatus(500);
   }
 };
