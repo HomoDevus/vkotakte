@@ -20,18 +20,12 @@ export const register = async (req: Request, res: Response) => {
         .send({ message: 'User with this email already exists' })
     }
 
-    // Create an user object
     let user = new User({
-      email: req.body.email,
-      name: req.body.name,
-      age: req.body.age,
-      city: req.body.city,
-      avatar: req.body.avatar,
+      ...req.body,
       password: hasPassword,
       user_type_id: 0,
     })
 
-    // Save User in the database
     const registeredUser = await user.save()
     let payload = {
       id: registeredUser._id,
