@@ -1,4 +1,4 @@
-import mongoose from 'mongoose'
+import mongoose, { Types } from "mongoose";
 
 const Schema = mongoose.Schema
 
@@ -8,7 +8,7 @@ const userSchema = new Schema({
   name: String,
   age: Number,
   city: String,
-  avatar: Buffer,
+  avatar: Types.ObjectId,
   publications: [String],
   friends: [String],
   user_type_id: Number,

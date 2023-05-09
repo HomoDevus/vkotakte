@@ -2,8 +2,6 @@ import { Request, Response } from 'express'
 import bcrypt from 'bcryptjs'
 import User from '../models/user'
 import jwt from 'jsonwebtoken'
-import path from 'path'
-import { ImageModel } from '../models/image'
 
 const config = process.env
 
@@ -30,15 +28,14 @@ export const register = async (req: Request, res: Response) => {
       city: req.body.city,
       avatar: req.body.avatar,
       password: hasPassword,
-      user_type_id: req.body.user_type_id,
+      user_type_id: 0,
     })
 
     // Save User in the database
     const registeredUser = await user.save()
-    // create payload then Generate an access token
     let payload = {
       id: registeredUser._id,
-      user_type_id: req.body.user_type_id || 0,
+      user_type_id: 0,
     }
 
     if (!config.TOKEN_SECRET)
@@ -75,22 +72,5 @@ export const login = async (req: Request, res: Response) => {
   } catch (err) {
     console.error(err)
     res.sendStatus(500)
-  }
-}
-
-export const uploadAvatar = async (req: Request, res: Response) => {
-  try {
-    // @ts-ignore
-    const { avatar } = req.files
-
-    if (!avatar) return res.sendStatus(400)
-    if (!/^image/.test(avatar.mimetype)) return res.sendStatus(400)
-
-    avatar.mv(path.resolve(`./upload/${avatar.name}`))
-    const savedImage = await ImageModel.create(avatar)
-    res.send(savedImage)
-  } catch (err) {
-    console.error(err)
-    return res.sendStatus(500)
   }
 }
