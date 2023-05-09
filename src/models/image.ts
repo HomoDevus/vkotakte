@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 
 const imageSchema = new mongoose.Schema(
   {
@@ -8,7 +8,7 @@ const imageSchema = new mongoose.Schema(
     encoding: String,
     name: String,
   },
-  { timestamps: true }
-);
+  { timestamps: true },
+)
 
-export const ImageModel = mongoose.model('images', imageSchema);
+export const ImageModel = mongoose.model('images', imageSchema)

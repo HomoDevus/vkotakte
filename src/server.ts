@@ -1,43 +1,43 @@
-import mongoose from 'mongoose';
-import express from 'express';
-import { config } from 'dotenv';
-import cors from 'cors';
-import fileUpload from 'express-fileupload';
+import mongoose from 'mongoose'
+import express from 'express'
+import { config } from 'dotenv'
+import cors from 'cors'
+import fileUpload from 'express-fileupload'
 
-const app = express();
+const app = express()
 
-config();
+config()
 
-const { FRONTEND_URL } = process.env;
+const { FRONTEND_URL } = process.env
 
-app.use(cors({ origin: FRONTEND_URL ? [FRONTEND_URL] : [] }));
-app.use(express.json());
+app.use(cors({ origin: FRONTEND_URL ? [FRONTEND_URL] : [] }))
+app.use(express.json())
 app.use(
   fileUpload({
     limits: {
       fileSize: 12000000,
     },
     abortOnLimit: true,
-  })
-);
+  }),
+)
 
 // Import Routes
-import authRoute from './routes';
+import authRoute from './routes'
 
 // Route Middlewares
-app.use('/api', authRoute);
+app.use('/api', authRoute)
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000
 app.listen(port, function () {
   // Connect to DB
-  const db = process.env.DB_HOST;
+  const db = process.env.DB_HOST
 
-  if (!db) throw Error('Mongodb host is not specified');
+  if (!db) throw Error('Mongodb host is not specified')
 
   mongoose
     .connect(db)
     .then(() => console.log('Connected to mongodb'))
-    .catch((err) => console.error('Mongodb connection error', err));
+    .catch(err => console.error('Mongodb connection error', err))
 
-  console.log('Server running on localhost:' + port);
-});
+  console.log('Server running on localhost:' + port)
+})
