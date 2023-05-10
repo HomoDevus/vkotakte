@@ -52,3 +52,14 @@ export const updateUserInfo = async (req: Request, res: Response) => {
     res.sendStatus(500)
   }
 }
+
+export const getUsersList = async (req: Request, res: Response) => {
+  try {
+    const users = await User.find()
+
+    res.json(users)
+  } catch (err) {
+    console.error(err)
+    res.status(500)
+  }
+}
