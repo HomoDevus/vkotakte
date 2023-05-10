@@ -1,9 +1,8 @@
-import { Request, Response, NextFunction } from 'express'
-
-const config = process.env
+import { Response, NextFunction } from 'express'
+import { RequestWithJwt } from "../types";
 import jwt from 'jsonwebtoken'
 
-type RequestWithJwt = Request & jwt.JwtPayload
+const config = process.env
 
 export const verifyUserToken = (
   req: RequestWithJwt,

@@ -5,7 +5,8 @@ type User = {
   name?: string
   age?: number
   city?: string
-  avatar?: string
+  avatar?: string,
+  friends?: string[],
   _id: Types.ObjectId
 }
 
@@ -26,5 +27,6 @@ export function mapUserUpdate(userData: User) {
     age: userData.age,
     city: userData.city,
     avatar: userData.avatar,
+    friends: userData.friends
   }
 }
