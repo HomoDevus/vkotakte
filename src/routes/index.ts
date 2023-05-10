@@ -10,7 +10,12 @@ import {
 } from '../controllers/user'
 import { register, login } from '../controllers/auth'
 import { getAvatar, uploadImage } from '../controllers/image'
-import { addPublication, getUserPublications } from '../controllers/publication'
+import {
+  addPublication,
+  getFeed,
+  getUserPublications,
+  likePublication,
+} from '../controllers/publication'
 
 const router = express.Router()
 // Auth
@@ -36,5 +41,7 @@ router.get(
   IsUser,
   getUserPublications,
 )
+router.get('/feed', verifyUserToken, IsUser, getFeed)
+router.put('/like-publication', verifyUserToken, IsUser, likePublication)
 
 export default router

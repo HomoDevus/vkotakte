@@ -74,14 +74,14 @@ export const addFriend = async (req: RequestWithJwt, res: Response) => {
 
 export const removeFriend = async (req: RequestWithJwt, res: Response) => {
   try {
-    const requestedUser = await User.findOne({_id: req.user.id})
+    const userWhoRequested = await User.findOne({_id: req.user.id})
     const userToRemove = await User.findOne({_id: req.body.userId})
 
-    if (!requestedUser || !userToRemove) return res.status(400).send({message: 'User is not found'})
+    if (!userWhoRequested || !userToRemove) return res.status(400).send({message: 'User is not found'})
 
-    requestedUser.friends = requestedUser.friends.filter(friendId => friendId !== req.body.userId)
+    userWhoRequested.friends = userWhoRequested.friends.filter(friendId => friendId !== req.body.userId)
     userToRemove.friends = userToRemove.friends.filter(friendId => friendId !== req.user.id)
-    const savedUser = await requestedUser.save()
+    const savedUser = await userWhoRequested.save()
     await userToRemove.save()
 
     res.json(savedUser)

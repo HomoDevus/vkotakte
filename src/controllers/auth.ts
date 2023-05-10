@@ -55,8 +55,7 @@ export const login = async (req: Request, res: Response) => {
 
       if (!config.TOKEN_SECRET)
         return res.status(400).send('No token secret specified')
-      // Create and assign token
-      let payload = { id: user._id, user_type_id: user.user_type_id }
+      let payload = { id: user._id, user_type_id: user.user_type_id || 0 }
       const token = jwt.sign(payload, config.TOKEN_SECRET)
 
       res.status(200).header('auth-token', token).send({ token: token })

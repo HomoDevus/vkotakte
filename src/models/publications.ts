@@ -7,7 +7,7 @@ const publicationSchema = new Schema({
   title: String,
   description: String,
   image: Types.ObjectId,
-  likes: Number,
+  likes: [Types.ObjectId]
 }, {timestamps: true})
 
 export default mongoose.model('publication', publicationSchema, 'publications')
