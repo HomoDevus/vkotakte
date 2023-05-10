@@ -1,4 +1,4 @@
-import mongoose, { Types } from "mongoose";
+import mongoose, { Types } from 'mongoose'
 
 const Schema = mongoose.Schema
 

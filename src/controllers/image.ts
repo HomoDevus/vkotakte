@@ -25,7 +25,7 @@ export async function getAvatar(req: Request, res: Response) {
   try {
     const { imageId: _id } = req.params
     const image = await ImageModel.findOne({ _id }).lean().exec()
-    res.json(image);
+    res.json(image)
   } catch (err) {
     res.sendStatus(500)
   }

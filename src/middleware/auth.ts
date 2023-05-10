@@ -1,5 +1,5 @@
 import { Response, NextFunction } from 'express'
-import { RequestWithJwt } from "../types";
+import { RequestWithJwt } from '../types'
 import jwt from 'jsonwebtoken'
 
 const config = process.env
