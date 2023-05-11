@@ -39,5 +39,5 @@ app.listen(port, function () {
     .then(() => console.log('Connected to mongodb'))
     .catch(err => console.error('Mongodb connection error', err))
 
-  console.log('Server running on localhost:' + port)
+  console.log('Server running on port:' + port)
 })

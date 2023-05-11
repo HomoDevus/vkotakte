@@ -10,7 +10,6 @@ export const uploadImage = async (req: Request, res: Response) => {
     if (!image) return res.sendStatus(400)
     if (!/^image/.test(image.mimetype)) return res.sendStatus(400)
 
-    image.mv(path.resolve(`./upload/${image.name}`))
     image.contentType = image.mimetype
     const imageData = new ImageModel(image)
     const savedImage = await imageData.save()
